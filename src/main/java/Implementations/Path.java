@@ -1,4 +1,6 @@
 package Implementations;
+import Interfaces.IPath;
+
 import java.io.PrintWriter;
 import static java.lang.Math.*;
 import static java.lang.System.out;
