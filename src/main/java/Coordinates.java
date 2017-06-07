@@ -2,31 +2,31 @@
  * Created by Adam Piech on 2017-05-08.
  */
 
-class Coordinates {
+public class Coordinates {
 
     private double latitude;
     private double longitude;
 
-    Coordinates() {}
+    public Coordinates() {}
 
-    Coordinates(double latitude, double longitude) {
+    public Coordinates(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    double getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    void setLatitude(double latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    double getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    void setLongitude(double longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
