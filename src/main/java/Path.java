@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-class Path implements IPath {
+public class Path implements IPath {
 
     private List<Coordinates> path;
     private int width;

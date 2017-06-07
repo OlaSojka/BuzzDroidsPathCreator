@@ -3,7 +3,7 @@ import java.util.List;
 
 import static java.lang.Math.*;
 
-class Terrain implements ITerrain {
+public class Terrain implements ITerrain {
 
     private List<Boundary> borders;
     private List<Coordinates> boundaryPoints;
