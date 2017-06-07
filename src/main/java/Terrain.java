@@ -3,17 +3,17 @@ import java.util.List;
 
 import static java.lang.Math.*;
 
-class Terrain {
+class Terrain implements ITerrain {
 
     private List<Boundary> borders;
     private List<Coordinates> boundaryPoints;
 
-    Terrain() {
+    public Terrain() {
         this.boundaryPoints = new ArrayList();
         this.borders = new ArrayList<>();
     }
 
-    void generateBorders() {
+    public void generateBorders() {
         borders.clear();
         for (int index = 0; index < boundaryPoints.size(); index++) {
 
@@ -65,7 +65,7 @@ class Terrain {
         return boundaryPoints;
     }
 
-    void setBoundaryPoints(List<Coordinates> boundaryPoints) {
+    public void setBoundaryPoints(List<Coordinates> boundaryPoints) {
         this.boundaryPoints = boundaryPoints;
     }
 
