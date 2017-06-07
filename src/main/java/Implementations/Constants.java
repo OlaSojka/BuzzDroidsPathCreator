@@ -1,4 +1,6 @@
- public class Constants {
+package Implementations;
+
+public class Constants {
 
      public static final int EARTH_RADIUS = 6378137;
      public static final int MINUTE_METERS = 1852;

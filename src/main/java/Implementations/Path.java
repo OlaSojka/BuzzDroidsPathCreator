@@ -1,5 +1,9 @@
+package Implementations;
 import java.io.PrintWriter;
 import static java.lang.Math.*;
+import static java.lang.System.out;
+import static jdk.nashorn.internal.objects.Global.Infinity;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -30,11 +34,23 @@ public class Path implements IPath {
         end.setLatitude(start.getLatitude());
         end.setLongitude(start.getLongitude());
 
-        double xIntersect = (moveAlong.getFactorB() - nextBorder.getFactorB()) / (nextBorder.getFactorA() - moveAlong.getFactorA());
-        double yIntersect = moveAlong.getFactorA() * xIntersect + moveAlong.getFactorB();
-
-        while (abs(end.getLongitude() - xIntersect) > threshold && abs(end.getLatitude() - yIntersect) > threshold) {
-
+        double xIntersect = 0;
+        double yIntersect = 0;
+        if((moveAlong.getFactorA() != Infinity && vertically) || (nextBorder.getFactorA() != Infinity && !vertically)) {
+            xIntersect = (moveAlong.getFactorB() - nextBorder.getFactorB()) / (nextBorder.getFactorA() - moveAlong.getFactorA());
+            yIntersect = moveAlong.getFactorA() * xIntersect + moveAlong.getFactorB();
+        }
+        else if (moveAlong.getFactorA() == Infinity){
+            xIntersect = start.getLongitude();
+            yIntersect = nextBorder.getFactorA() * xIntersect + nextBorder.getFactorB();
+        }
+        else if (nextBorder.getFactorA() == Infinity) {
+            xIntersect = start.getLongitude();
+            yIntersect = moveAlong.getFactorA() * xIntersect + moveAlong.getFactorB();
+        }
+        out.println("*** " + vertically);
+       // while (abs(end.getLongitude() - xIntersect) > threshold && abs(end.getLatitude() - yIntersect) > threshold) {
+        while(i < 10) {
             double xStart = end.getLongitude();
             double yStart = end.getLatitude();
             double a = moveAlong.getFactorA();
@@ -117,13 +133,23 @@ public class Path implements IPath {
             {
                 continue;
             } else {
-                double xIntersect = (bord.getFactorB() - b) / (a - bord.getFactorA());
-
-                if (left && abs(xIntersect - p.getLongitude()) > 0.00001) {
-                    return bord;
-                } else if (!left && abs(xIntersect - p.getLongitude()) > 0.00001) {
-                    return bord;
+                double xIntersect = 0;
+                if(bord.getFactorA() != Infinity)
+                    xIntersect = (bord.getFactorB() - b) / (a - bord.getFactorA());
+                    if (left && abs(xIntersect - p.getLongitude()) > 0.00001) {
+                        return bord;
+                    } else if (!left && abs(xIntersect - p.getLongitude()) > 0.00001) {
+                        return bord;
+                    }
+                else {
+                    xIntersect = p.getLongitude();
+                    if (left && abs(xIntersect - p.getLongitude()) == 0) {
+                        return bord;
+                    } else if (!left && abs(xIntersect - p.getLongitude()) == 0) {
+                        return bord;
+                    }
                 }
+
             }
         }
         return new Boundary();

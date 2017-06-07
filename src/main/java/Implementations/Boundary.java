@@ -1,3 +1,5 @@
+package Implementations;
+
 class Boundary {
 
     private Coordinates startPoint;

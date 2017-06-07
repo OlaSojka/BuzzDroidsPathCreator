@@ -1,3 +1,7 @@
+package Implementations;
+
+import Interfaces.ITerrain;
+
 import java.util.ArrayList;
 import java.util.List;
 
