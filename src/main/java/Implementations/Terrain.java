@@ -32,6 +32,8 @@ public class Terrain implements ITerrain {
             double distance = getDistance(startCoor, endCoor);
             double factorA = (endCoor.getLatitude() - startCoor.getLatitude())
                     / (endCoor.getLongitude() - startCoor.getLongitude());
+            if(endCoor.getLongitude() - startCoor.getLongitude() == 0)
+                factorA = 0;
             double factorB = startCoor.getLatitude() - factorA * startCoor.getLongitude();
 
             borders.add(new Boundary(startCoor, endCoor, factorA, factorB, distance));

@@ -1,5 +1,4 @@
 package Interfaces;
-
 import Implementations.Coordinates;
 
 import java.util.List;
