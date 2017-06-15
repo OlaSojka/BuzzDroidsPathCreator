@@ -22,12 +22,14 @@ public class Path implements IPath {
     private double widthInMinutesLat;
     private boolean fieldEnd = false;
     private int count = 0;
+    private Coordinates home;
 
-    public Path(Terrain t, int w) {
+    public Path(Terrain t, int w, Coordinates home) {
         this.t = t;
         this.width = w;
         this.path = new ArrayList<>();
         getWidthInMinutes();
+        this.home = home;
     }
 
     private void getWidthInMinutes() {
@@ -65,7 +67,7 @@ public class Path implements IPath {
             }
         }
 
-        out.println(count + ". v: " + vertically + "  l: " + left);
+        //out.println(count + ". v: " + vertically + "  l: " + left);
         while (canMove(end, xIntersect, yIntersect, vertically)) {
             double xStart = end.getLongitude();
             double yStart = end.getLatitude();
@@ -111,12 +113,13 @@ public class Path implements IPath {
 
             end.setLatitude(y);
             end.setLongitude(x);
-            this.path.add(new Coordinates(y, x));
+            if((!vertically && i%60 == 0) || (vertically && i%10 == 0))
+                this.path.add(new Coordinates(y, x));
             i++;
         }
 
         this.path.add(new Coordinates(end.getLatitude(), end.getLongitude()));
-        //printVector(path);
+       // printVector(path);
         count++;
         return new Coordinates(end.getLatitude(), end.getLongitude());
     }
@@ -294,6 +297,7 @@ public class Path implements IPath {
                 this.fieldEnd = true;
         }
         //printVector(this.path);
+        this.path.add(this.home);
         return this.path;
     }
 
